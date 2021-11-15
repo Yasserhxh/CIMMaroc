@@ -1,0 +1,365 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Domain.Models.Commande.CommandeViewModel
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-12 mb-2 mt-1">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb p-0 mb-0">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a> </li>
+                                <li class="breadcrumb-item active"><a href="#">Demande de l'offre de prix</a> </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <!-- Dashboard Ecommerce Starts -->
+            <section id="dashboard-ecommerce">
+                <div class="row">
+                    <!-- Greetings Content Starts -->
+                    <div class="col-xl-12 col-md-12 col-12 dashboard-greetings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Nouveau Client	 </h4>
+                                <a class="heading-elements-toggle"> <i class="bx bx-dots-vertical font-medium-3"></i> </a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li> <a data-action="collapse"> <i class="bx bx-chevron-down"></i> </a> </li>
+                                        <li> <a data-action="expand"> <i class="bx bx-fullscreen"></i> </a> </li>
+                                        <li> <a data-action="reload"> <i class="bx bx-revision"></i> </a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- table success start -->
+
+                                            <div class="card form-wizard">
+                                                <!-- datatable start -->
+                                                <!-- Form Wizard -->
+                                                <form asp-controller="Commande" asp-action="Create">
+                                                    <!-- Form progress -->
+                                                    <div class="form-wizard-steps form-wizard-tolal-steps-4">
+
+                                                        <!-- Step 1 -->
+                                                        <div class="form-wizard-step active">
+
+                                                            <p>Information de client</p>
+                                                        </div>
+                                                        <!-- Step 1 -->
+                                                        <!-- Step 2 -->
+                                                        <div class="form-wizard-step">
+
+                                                            <p>Délai & Conditions de paiement</p>
+                                                        </div>
+                                                        <!-- Step 2 -->
+                                                        <!-- Step 3 -->
+                                                        <div class="form-wizard-step">
+                                                            <p>Tarif BPE & Services</p>
+                                                        </div>
+                                                        <!-- Step 3 -->
+                                                    </div>
+                                                    <!-- Form progress -->
+                                                    <!-- Form Step 1 -->
+                                                    <fieldset class="wizard">
+                                                        <div class="form-row">
+                                                            <div class="col-md-6 mb-1">
+                                                                <label for="validationTooltip01">Raison Sociale</label>
+                                                                <input asp-for="Client.RaisonSociale" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-6 mb-1">
+                                                                <label for="validationTooltip01">Forme Juridique</label>
+                                                                <select class="custom-select" asp-for="Client.FormeJuridique_Id" asp-items="@ViewBag.FormeJuridique">
+                                                                    <option selected disabled>Sélectionnez une forme juridique</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-1">
+                                                                <label for="validationTooltip01">N° ICE</label>
+                                                                <input asp-for="Client.Ice" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-6 mb-1">
+                                                                <label for="validationTooltip01">N° CNIE</label>
+                                                                <input asp-for="Client.Cnie" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-12 mb-1">
+                                                                <label for="validationTooltip01">Adresse</label>
+                                                                <input asp-for="Client.Adresse" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-4 mb-1">
+                                                                <label for="validationTooltip01">Destinataire/Interlocuteur</label>
+                                                                <input asp-for="Client.Destinataire_Interlocuteur" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-4 mb-1">
+                                                                <label for="validationTooltip01">N° de téléphone</label>
+                                                                <input asp-for="Client.Gsm" type="text" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-4 mb-1">
+                                                                <label for="validationTooltip01">Email</label>
+                                                                <input asp-for="Client.Email" type="text" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row">
+                                                            <fieldset class="fieldset">
+                                                                <legend>Information du chantier</legend>
+                                                                <div class="form-row">
+
+                                                                    <div class="col-md-6 mb-1">
+                                                                        <label for="validationTooltip01">Nom du chantier</label>
+                                                                        <input asp-for="Chantier.Ctn_Nom" type="text" class="form-control">
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-1">
+                                                                        <label for="validationTooltip01">Type du chantier</label>
+                                                                        <select class="custom-select" asp-for="Chantier.Ctn_Tc_Id" asp-items="@ViewBag.TypeChantier">
+                                                                            <option selected disabled>Sélectionnez un type</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-1">
+                                                                        <label for="validationTooltip01">Maître d'ouvrage</label>
+                                                                        <input asp-for="Chantier.MaitreOuvrage" type="text" class="form-control">
+                                                                    </div>
+                                                                    <div class="col-md-6 mb-1">
+                                                                        <label for="validationTooltip01">Volume prévisionnel</label>
+                                                                        <input asp-for="Chantier.VolumePrevisonnel" type="text" class="form-control">
+                                                                        <span class="input-info"> m<font class="m3">3</font></span>
+                                                                    </div>
+                                                                    <div class="col-md-2 mb-1">
+                                                                        <label for="validationTooltip01">Durée de projet</label>
+                                                                        <input asp-for="Chantier.Duree" type="text" class="form-control">
+                                                                        <span class="input-info"> Mois</span>
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-1">
+                                                                        <label for="validationTooltip01">Centrale à béton</label>
+                                                                        <select class="custom-select" asp-for="Chantier.Ctn_Ctr_Id" asp-items="@ViewBag.Centrale">
+                                                                            <option selected disabled>Sélectionnez une centrale</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-2 mb-1">
+                                                                        <label for="validationTooltip01">Rayon</label>
+                                                                        <input asp-for="Chantier.Rayon" type="text" class="form-control">
+                                                                        <span class="input-info"> Km</span>
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-1">
+                                                                        <label for="validationTooltip01">Zone de livraison</label>
+                                                                        <select class="custom-select" asp-for="Chantier.Ctn_Zone_Id" asp-items="@ViewBag.Zone">
+                                                                            <option selected disabled>Sélectionnez une zone</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="form-wizard-buttons">
+                                                            <button type="button" class="btn btn-next">Suivant</button>
+                                                        </div>
+                                                    </fieldset>
+                                                    <!-- Form Step 1 -->
+                                                    <!-- Form Step 2 -->
+                                                    <fieldset class="wizard">
+                                                        <div class="form-row">
+                                                            <div class="col-md-12 mb-1">
+                                                                <label for="validationTooltip01">Conditions</label>
+                                                                <textarea asp-for="Commande.Conditions" class="form-control" rows="5"></textarea>
+                                                            </div>
+                                                            <div class="col-md-4 mb-1">
+                                                                <label for="validationTooltip01">Délai de paiement</label>
+                                                                <input asp-for="Commande.Delai_Paiement" type="text" class="form-control">
+                                                                <span class="input-info"> Mois</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-wizard-buttons">
+                                                            <button type="button" class="btn btn-previous">Précédent</button>
+                                                            <button type="button" class="btn btn-next">Suivant</button>
+                                                        </div>
+                                                    </fieldset>
+                                                    <!-- Form Step 2 -->
+                                                    <!-- Form Step 3 -->
+                                                    <fieldset class="wizard">
+                                                        <div class="form-row">
+                                                            <fieldset class="fieldset">
+                                                                <legend>Articles</legend>
+                                                                <div class="form-row">
+                                                                    <div class="col-md-4 mb-1">
+                                                                        <label for="validationTooltip01">Article BPE</label>
+                                                                        <select id="Article" class="custom-select" asp-items="@ViewBag.Article" onchange="GetTarfiArticle()">
+                                                                            <option selected disabled>Sélectionnez un article</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-1">
+                                                                        <label for="validationTooltip01">Traif</label>
+                                                                        <input id="TarifArticle" type="text" class="form-control">
+                                                                        <span class="input-info">DH/m<font class="m3">3</font></span>
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-1">
+                                                                        <button type="button" class="btn btn-dark glow float-right mt-1" onclick="ArticleUpdate()" id="updateButton">Ajouter à la liste</button>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                            <fieldset class="fieldset">
+                                                                <legend>Articles Sélectionnés</legend>
+                                                                <div class="form-row">
+                                                                    <div class="col-md-12 mb-1">
+                                                                        <div class="table" id="divTable" style="display: none">
+                                                                            <table id="ArticleTable" class="table table-intragroupe table-bordered mb-0">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Designation article</th>
+                                                                                        <th>Tarif DH/m<font class="m3">3</font></th>
+                                                                                        <th>Action</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                            <fieldset class="fieldset">
+                                                                <legend>Tarifs de services</legend>
+                                                                <div class="form-row">
+                                                                    <div class="col-md-4 mb-1">
+                                                                        <label for="validationTooltip01">Tarif de transport</label>
+                                                                        <input asp-for="Commande.TarifTransport" type="text" class="form-control">
+                                                                        <span class="input-info">DH/m<font class="m3">3</font></span>
+                                                                    </div>
+                                                                    <div class="col-md-4 mb-1">
+                                                                        <label for="validationTooltip01">Tarif de pompage</label>
+                                                                        <input asp-for="Commande.TarifPompage" type="text" class="form-control">
+                                                                        <span class="input-info">DH/m<font class="m3">3</font></span>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="form-wizard-buttons">
+                                                            <button type="button" class="btn btn-previous">Précédent</button>
+                                                            <button type="submit" class="btn btn-submit">Enregistrer</button>
+                                                        </div>
+                                                    </fieldset>
+                                                    <!-- Form Step 3 -->
+                                                </form>
+                                                <!-- Form Wizard -->
+                                                <!-- datatable ends -->
+                                            </div>
+                                            <!-- table success ends -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Dashboard Ecommerce ends -->
+        </div>
+    </div>
+</div>
+
+<script>
+     @if ((string)TempData["Creation"] == "ko")
+        {
+            <text>CreationNotifications();</text>
+        }
+    function CreationNotifications() {
+        ShowNotification("Une erreur s'est produite.", NotifToaster.ErrorType, NotifToaster.Top_Full_Width);
+    }
+
+    function GetTarfiArticle() {
+        var data = { Id: $('#Article').val() };
+         $.ajax({
+                url: '@Url.Action("GetTarifArticle", "Home")',
+                type: "POST",
+                cache: false,
+                async: true,
+                data: data,
+                success: function (data) {
+                    $('#TarifArticle').val('');
+                    $('#TarifArticle').val(data);
+                },
+                error: function () {
+
+                }
+         });
+    }
+
+    function ArticleAdd() {
+        ArticleAjout();
+        formClear();
+    }
+
+    function formClear() {
+        $('#Article').prop('selectedIndex', 0);
+        $("#TarifArticle").val('');
+    }
+
+    function ArticleAjout() {
+        if ($("#ArticleTable tbody").length == 0) {
+            $("#ArticleTable").append("<tbody id='tbodyArticles'></tbody>");
+            document.getElementById('divTable').style.display = "block";
+        }
+        var Article = $("#Article option:selected").text();
+        var ArticleId = $("#Article option:selected").val();
+        var Tarif = $("#TarifArticle").val();
+        var index = $("#tbodyArticles").children("tr").length;
+        // Append Article to the table
+        $("#ArticleTable tbody").append("<tr>" +
+            "<td class='text-bold-500'>" + Article + "</td>" +
+            "<td class='text-bold-500'>" + Tarif + "</td>" +
+            "<td class='text-center'>" +
+            "<div class='dropdown'>" +
+                "<span class='bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' role='menu'></span>" +
+                "<div class='dropdown-menu dropdown-menu-right'>" +
+                    "<a class='dropdown-item' onclick='ArticleDisplay(this);' style='cursor:pointer'><i class='bx bx-edit-alt mr-1'></i> Éditer</a>" +
+                    "<a class='dropdown-item' onclick='ArticleDelete(this)' style='cursor:pointer'><i class='bx bx-trash mr-1'></i> Supprimer</a>" +
+                "</div>" +
+            "</div>" +
+            "</td>" +
+            "<td class='text-bold-500' style='display:none;'>" + ArticleId + "</td>" +
+            "<td style='display:none;'>" + "<input type=" + "text" + " name=" + "'DetailCommandes[" + index + "].IdArticle'" + "value ='" + ArticleId + "'></td>" +
+            "<td style='display:none;'>" + "<input type=" + "text" + " name=" + "'DetailCommandes[" + index + "].Montant'" + "value ='" + Tarif + "'></td>" +
+            "</tr>"
+        );
+        formClear();
+    }
+
+
+    function ArticletUpdateInTable() {
+        $(_row).after(ArticleAjout());
+        formClear();
+        $("#updateButton").text("Ajouter à la liste");
+    }
+
+    function ArticleDisplay(ctl) {
+        _row = $(ctl).parents("tr");
+        var cols = _row.children("td");
+        $(_row).remove();
+        $("#Article").val($(cols[3]).text());
+        $("#TarifArticle").val($(cols[1]).text());
+        $("#updateButton").text("Modifier");
+    }
+
+    function ArticleUpdate() {
+        if ($("#Article").val() != null && $("#Article").val() != '' &&
+            $("#TarifArticle").val() != null && $("#TarifArticle").val() != '') {
+            if ($("#updateButton").text() == "Modifier") {
+                ArticletUpdateInTable();
+            }
+            else {
+                ArticleAjout();
+            }
+            $("#Article").focus();
+        }
+    }
+
+    function ArticleDelete(ctl) {
+        ctlSupp = ctl;
+        var ctl = ctlSupp;
+
+        $(ctl).parents("tr").remove();
+    }
+</script>

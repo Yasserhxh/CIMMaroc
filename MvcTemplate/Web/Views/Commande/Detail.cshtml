@@ -1,0 +1,228 @@
+﻿@model Domain.Models.CommandeModel
+@{ 
+    double tarifTransport = Model.TarifTransport;
+    double tarifPompage = Model.TarifPompage;
+    var sum = (double)Model.DetailCommandes.Sum(x => x.Montant) + tarifPompage + tarifTransport;
+}
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-12 mb-2 mt-1">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb p-0 mb-0">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="bx bx-home-alt"></i></a> </li>
+                                <li class="breadcrumb-item active"><a href="#">Demande de l'offre de prix</a> </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <!-- Dashboard Ecommerce Starts -->
+            <section id="dashboard-ecommerce">
+                <div class="row">
+                    <!-- Greetings Content Starts -->
+                    <div class="col-xl-12 col-md-12 col-12 dashboard-greetings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Détails de la commande</h4>
+                                <a class="heading-elements-toggle"> <i class="bx bx-dots-vertical font-medium-3"></i> </a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li> <a data-action="collapse"> <i class="bx bx-chevron-down"></i> </a> </li>
+                                        <li> <a data-action="expand"> <i class="bx bx-fullscreen"></i> </a> </li>
+                                        <li> <a data-action="reload"> <i class="bx bx-revision"></i> </a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- table success start -->
+
+                                            <div class="card">
+                                                <!-- datatable start -->
+                                                <form method="get" class="needs-validation" novalidate>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row justify-content-center">
+                                                                <div>N° Commande : <b style="color:black">@Model.IdCommande</b></div>
+                                                                <div class="ml-3">Client : <b style="color:black">@Model.Client.RaisonSociale</b></div>
+                                                                <div class="ml-3">Chantier : <b style="color:black">@Model.Chantier.Ctn_Nom</b></div>
+                                                                <div class="ml-3">Montant : <b style="color:black">@sum</b></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <!-- datatable ends -->
+
+                                            </div>
+
+                                            <!-- table success ends -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <!-- Greetings Content Starts -->
+                    <div class="col-xl-12 col-md-12 col-12 dashboard-greetings">
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="heading-elements-toggle"> <i class="bx bx-dots-vertical font-medium-3"></i> </a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li> <a data-action="collapse"> <i class="bx bx-chevron-down"></i> </a> </li>
+                                        <li> <a data-action="expand"> <i class="bx bx-fullscreen"></i> </a> </li>
+                                        <li> <a data-action="reload"> <i class="bx bx-revision"></i> </a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- table success start -->
+
+                                            <div class="card">
+                                                <!-- datatable start -->
+                                                <div class="table">
+                                                    <table class="table table-intragroupe table-bordered mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Produit </th>
+                                                                <th>Code produit</th>
+                                                                <th>Prix (@Model.Currency)</th>
+                                                                <th>Délai de paiement</th>
+                                                                <th>Statut</th>
+                                                                @if (User.IsInRole("Administration des ventes") && Model.DetailCommandes.Any(x=>x.IdStatut == 2))
+                                                                {<th>Action</th>}
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cmd in Model.DetailCommandes)
+                                                            {
+                                                            <tr>
+                                                                <td class="text-bold-500">@cmd.Article.Designation</td>
+                                                                <td class="text-bold-500">@cmd.IdArticle</td>
+                                                                <td class="text-bold-500">@cmd.Montant</td>
+                                                                <td class="text-bold-500">@Model.Delai_Paiement</td>
+                                                                <td class="text-bold-500">@cmd.Statut.Libelle</td>
+                                                                @if (User.IsInRole("Administration des ventes") && cmd.IdStatut == 2)
+                                                                {
+                                                                    <td class="text-center">
+                                                                        <div class="dropdown">
+                                                                            <span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer"
+                                                                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu"></span>
+                                                                            <div class="dropdown-menu dropdown-menu-right">
+                                                                                <a class="dropdown-item" href="#"><i class="bx bx-check-circle mr-1"></i>Valider l'article</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                }
+                                                            </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- datatable ends -->
+
+                                            </div>
+
+                                            <!-- table success ends -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <!-- Greetings Content Starts -->
+                    <div class="col-xl-12 col-md-12 col-12 dashboard-greetings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Tarif de transport / pompage</h4>
+                                <a class="heading-elements-toggle"> <i class="bx bx-dots-vertical font-medium-3"></i> </a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li> <a data-action="collapse"> <i class="bx bx-chevron-down"></i> </a> </li>
+                                        <li> <a data-action="expand"> <i class="bx bx-fullscreen"></i> </a> </li>
+                                        <li> <a data-action="reload"> <i class="bx bx-revision"></i> </a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <!-- table success start -->
+
+                                            <div class="card">
+                                                <!-- datatable start -->
+                                                <form method="get" class="needs-validation" novalidate>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row justify-content-center">
+                                                                <div>Tarif de transport: <b style="color:black">@Model.TarifTransport @Model.Currency</b></div>
+                                                                <div class="ml-3">Zone  : <b style="color:black">@Model.Chantier.ZONE_CHANTIER.Zone_Libelle</b></div>
+                                                                @if ((double)Model.TarifTransport != (double)Model.Chantier.ZONE_CHANTIER.Zone_Prix)
+                                                                {
+                                                                    <div class="ml-3"><button class="btn btn-sm btn-success glow mb-sm-25"><i class="fas fa-check"></i>&ensp; Valider le tarif</button></div>
+                                                                }
+                                                                else
+                                                                {<div class="ml-3"><button class="btn btn-sm btn-light glow mb-sm-25" disabled><i class="fas fa-check"></i>&ensp; Transport Validé</button></div>}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row justify-content-center">
+                                                                <div>Tarif de pompage : <b style="color:black">@Model.TarifPompage @Model.Currency</b></div>
+                                                                <div class="ml-3">Zone  : <b style="color:black">@Model.Chantier.ZONE_CHANTIER.Zone_Libelle</b></div>
+                                                                @if ((double)Model.TarifPompage != (double)Model.Chantier.ZONE_CHANTIER.Zone_Prix)
+                                                                {
+                                                                    <div class="ml-3"><button class="btn btn-sm btn-success glow mb-sm-25"><i class="fas fa-check"></i>&ensp; Valider le tarif</button></div>
+                                                                }
+                                                                else
+                                                                {<div class="ml-3"><button class="btn btn-sm btn-primary glow mb-sm-25" disabled><i class="fas fa-check"></i>&ensp; Pompage Validé</button></div>}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <!-- datatable ends -->
+                                            </div>
+                                            <!-- table success ends -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+            <!-- Dashboard Ecommerce ends -->
+
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
