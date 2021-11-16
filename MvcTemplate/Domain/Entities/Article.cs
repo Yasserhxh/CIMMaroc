@@ -13,6 +13,7 @@ namespace Domain.Entities
         public int Article_Id { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         public string Designation { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public double? Tarif { get; set; }
     }
 }
